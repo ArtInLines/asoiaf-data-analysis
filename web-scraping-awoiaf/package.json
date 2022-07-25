@@ -1,0 +1,22 @@
+{
+	"name": "asoiaf-data-analysis",
+	"version": "0.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ArtInLines/asoiaf-data-analysis.git"
+	},
+	"author": "ArtInLines",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ArtInLines/asoiaf-data-analysis/issues"
+	},
+	"homepage": "https://github.com/ArtInLines/asoiaf-data-analysis#readme",
+	"dependencies": {
+		"puppeteer": "^15.5.0"
+	}
+}
