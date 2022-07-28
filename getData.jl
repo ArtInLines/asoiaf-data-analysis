@@ -4,9 +4,9 @@ function find(f::Function, A)
 	return A[findall(f, A)[1]]
 end
 
-getIDFromURL(s::AbstractString)::AbstractString = last(split(s, "/"))
+getIDFromURL(s::AbstractString)::Integer = parse(Int, last(split(s, "/")))
 	
-parseDateAndPlace(s::AbstractString) = begin
+parseDateAndPlace(s::Tuple) = begin
 	if s == ""
 		return (nothing, nothing)
 	end
@@ -46,7 +46,7 @@ parseDateAndPlace(s::AbstractString) = begin
 	if startswith(lowercase(sub), " at")
 		sub = SubString(sub, 4)
 	end
-	return (digit, lstrip(sub))
+	return digit, lstrip(sub)
 end
 
 function cleanData(chars)::AbstractArray
@@ -54,11 +54,11 @@ function cleanData(chars)::AbstractArray
 		c["id"] = getIDFromURL(c["url"])
 		c["books"] = getIDFromURL.(c["books"])
 		c["allegiances"] = getIDFromURL.(c["allegiances"])
-		c["isFemale"] = lowercase(c["gender"]) == "female"
-		c["died"] = parseDateAndPlace(c["died"])
-		c["born"] = parseDateAndPlace(c["born"])
+		c["deathDate"], c["deathPlace"] = parseDateAndPlace(c["died"])
+		c["birthDate"], c["birthPlace"] = parseDateAndPlace(c["born"])
+		delete!(c, "died")
+		delete!(c, "born")
 		delete!(c, "url")
-		delete!(c, "gender")
 	end
 end
 
